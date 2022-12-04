@@ -1,6 +1,14 @@
 package com.finalproject.facilgest.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class MovimentacaoDeCaixa {
 
   private long idMovimentacao;
@@ -8,50 +16,4 @@ public class MovimentacaoDeCaixa {
   private String dataDeRealizacao;
   private long valor;
   private long idNota;
-
-
-  public long getIdMovimentacao() {
-    return idMovimentacao;
-  }
-
-  public void setIdMovimentacao(long idMovimentacao) {
-    this.idMovimentacao = idMovimentacao;
-  }
-
-
-  public String getTipo() {
-    return tipo;
-  }
-
-  public void setTipo(String tipo) {
-    this.tipo = tipo;
-  }
-
-
-  public String getDataDeRealizacao() {
-    return dataDeRealizacao;
-  }
-
-  public void setDataDeRealizacao(String dataDeRealizacao) {
-    this.dataDeRealizacao = dataDeRealizacao;
-  }
-
-
-  public long getValor() {
-    return valor;
-  }
-
-  public void setValor(long valor) {
-    this.valor = valor;
-  }
-
-
-  public long getIdNota() {
-    return idNota;
-  }
-
-  public void setIdNota(long idNota) {
-    this.idNota = idNota;
-  }
-
 }
