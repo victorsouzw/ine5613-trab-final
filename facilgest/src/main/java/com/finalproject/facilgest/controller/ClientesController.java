@@ -6,11 +6,12 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController("/clientes")
 public class ClientesController {
     @Autowired
     private ClientesService clientesService;
     Gson gson = new Gson();
+
     @GetMapping("/findAll")
     public String findAll(){
 

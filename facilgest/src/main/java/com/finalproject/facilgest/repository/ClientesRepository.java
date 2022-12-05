@@ -90,14 +90,13 @@ public class ClientesRepository {
         Optional<Clientes> cliente = Optional.of(jdbcTemplate.queryForObject("select * from clientes where cpf_cnpj = ?", new Object[] {
                         receivedCliente.getCpfCnpj()},
                 new BeanPropertyRowMapper<Clientes>(Clientes.class)));
-        System.out.println(cliente.toString());
+
         Clientes clientes = ClientesRepository.uglySolutionAgainstNullFields(receivedCliente, cliente);
-        System.out.println(clientes.toString());
+
         return jdbcTemplate.update("update clientes  set endereco = ?, dataDeNascimento = ?" +
                         ", email = ?, nomeCompleto = ?, telefone = ? where CPF_CNPJ = ?",
 
                 clientes.getEndereco(), clientes.getDataDeNascimento(), clientes.getEmail(),
                 clientes.getNomeCompleto(), clientes.getTelefone(), clientes.getCpfCnpj());
-
     }
 }

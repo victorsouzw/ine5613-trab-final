@@ -1,5 +1,6 @@
 package com.finalproject.facilgest.repository;
 
+import com.finalproject.facilgest.entity.Clientes;
 import com.finalproject.facilgest.entity.Fornecedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -23,7 +24,7 @@ public class FornecedoresRepository {
             Fornecedor fornecedor = new Fornecedor();
             fornecedor.setCnpj(rs.getString("cnpj"));
             fornecedor.setNome(rs.getString("nome"));
-            fornecedor.setTipoDeProduto(rs.getString("tipo_de_produto"));
+            fornecedor.setTipoDeProduto(rs.getString("tipoDeProduto"));
             return fornecedor;
         }
     }
@@ -32,7 +33,7 @@ public class FornecedoresRepository {
         return jdbcTemplate.query("select * from fornecedor", new FornecedoresRowMapper());
     }
 
-    public Optional<Fornecedor> findByCnpj(int cnpj) {
+    public Optional<Fornecedor> findByCnpj(String cnpj) {
         return Optional.of(jdbcTemplate.queryForObject("select * from fornecedor where cnpj = ?", new Object[] {
                         cnpj},
                 new BeanPropertyRowMapper<Fornecedor>(Fornecedor.class)));
@@ -45,14 +46,33 @@ public class FornecedoresRepository {
     }
 
     public int insert(Fornecedor fornecedor) {
-        return jdbcTemplate.update("update into fornecedor (cnpj, nome, tipo_de_produto) values(?, ?, ?)", new Object[] {
+        return jdbcTemplate.update("insert into fornecedor (cnpj, nome, tipoDeProduto) values(?, ?, ?)", new Object[] {
                 fornecedor.getCnpj(), fornecedor.getNome(), fornecedor.getTipoDeProduto()
         });
     }
+    private static Fornecedor uglySolutionAgainstNullFields(Fornecedor receivedFornecedor, Optional<Fornecedor> fornecedor){
+        var tipoDeProduto = receivedFornecedor.getTipoDeProduto();
+        var nome = receivedFornecedor.getNome();
 
-    public int update(Fornecedor fornecedores) {
 
-        return jdbcTemplate.update("update fornecedores set nome = ? , tipoDeProduto = ? " +
+        if(tipoDeProduto != null) {
+            fornecedor.get().setTipoDeProduto(receivedFornecedor.getTipoDeProduto());
+        }
+
+        if(nome != null ) {
+            fornecedor.get().setNome(receivedFornecedor.getNome());
+        }
+
+        return fornecedor.get();
+    }
+    public int update(Fornecedor receivedFornecedor) {
+        Optional<Fornecedor> fornecedor = Optional.of(jdbcTemplate.queryForObject("select * from fornecedor where cnpj = ?", new Object[] {
+                        receivedFornecedor.getCnpj()},
+                new BeanPropertyRowMapper<Fornecedor>(Fornecedor.class)));
+
+        Fornecedor fornecedores = FornecedoresRepository.uglySolutionAgainstNullFields(receivedFornecedor, fornecedor);
+
+        return jdbcTemplate.update("update fornecedor set nome = ? , tipoDeProduto = ? " +
                         "where CNPJ = ?",
                 new Object[] {
                         fornecedores.getNome(), fornecedores.getTipoDeProduto(), fornecedores.getCnpj()
