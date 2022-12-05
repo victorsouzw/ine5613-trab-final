@@ -1,9 +1,6 @@
 package com.finalproject.facilgest.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -12,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class Clientes {
 
   private String endereco;
-  private int cpfCnpj;
+  private String cpfCnpj;
   private String dataDeNascimento;
   private String email;
   private String nomeCompleto;
