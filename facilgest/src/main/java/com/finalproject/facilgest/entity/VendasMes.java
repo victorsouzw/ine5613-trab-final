@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Gerente {
+public class VendasMes {
 
-  private String cpfGerente;
-
+  private long numeroDeVendasMes;
+  private long valorVendasMes;
+  private String dataVenda;
+  private String cpfVendedor;
 }
