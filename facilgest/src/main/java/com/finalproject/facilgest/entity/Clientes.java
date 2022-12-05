@@ -12,10 +12,9 @@ import lombok.NoArgsConstructor;
 public class Clientes {
 
   private String endereco;
-  private String cpfCnpj;
+  private int cpfCnpj;
   private String dataDeNascimento;
   private String email;
   private String nomeCompleto;
   private String telefone;
-  private long idNota;
 }

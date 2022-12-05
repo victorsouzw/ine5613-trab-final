@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class Gerente {
 
   private long numCompras;
-  private String cpf;
-  private long idNota;
+  private String cpfGerente;
 
 }

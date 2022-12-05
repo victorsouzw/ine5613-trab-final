@@ -15,5 +15,4 @@ public class Fornecedor {
   private String cnpj;
   private String nome;
   private String tipoDeProduto;
-  private long idNota;
 }

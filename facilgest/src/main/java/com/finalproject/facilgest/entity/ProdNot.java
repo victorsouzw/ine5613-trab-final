@@ -15,4 +15,5 @@ public class ProdNot {
   private long valorTotal;
   private long idNota;
   private long idProduto;
+
 }

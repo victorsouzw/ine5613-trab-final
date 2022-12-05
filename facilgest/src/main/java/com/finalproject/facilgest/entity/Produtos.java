@@ -14,6 +14,6 @@ public class Produtos {
   private long multiplicadorDesconto;
   private long idProduto;
   private String nome;
-  private String valorUn;
-  private String estoque;
+  private long valorUn;
+  private long estoque;
 }

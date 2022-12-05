@@ -1,6 +1,4 @@
 package com.finalproject.facilgest.entity;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +12,5 @@ public class Vendedor {
 
   private long numeroDeVendasMes;
   private long valorVendasMes;
-  private String cpf;
-  private long idNota;
+  private String cpfVendedor;
 }
